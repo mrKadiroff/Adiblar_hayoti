@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/saqlash"
+        android:title="Saqlangan"
+        app:showAsAction="always"
+        android:icon="@drawable/saqlashd"/>
+    <item
+        android:id="@+id/qidurv"
+        android:title="Adiblar"
+        app:showAsAction="always"
+        android:icon="@drawable/ic_baseline_search_24"/>
+
+
+
+
+</menu>

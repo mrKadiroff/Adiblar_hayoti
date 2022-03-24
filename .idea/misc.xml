@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable-v24/edit_text_style.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/adib.xml" value="0.32037037037037036" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/btn_bg.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/circle_shape.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/circle_white.xml" value="0.29074074074074074" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/edit_style.xml" value="0.3175925925925926" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/ic_baseline_search_24.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/save.xml" value="0.32037037037037036" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/saved.xml" value="0.3769230769230769" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/search_text_style.xml" value="0.31203703703703706" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/settings.xml" value="0.32037037037037036" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/tab_corner_bg.xml" value="0.1" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/tab_indicator_corner_bg.xml" value="0.1" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/tab_item_back_selected.xml" value="0.3828125" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/tab_item_back_unselected.xml" value="0.31666666666666665" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/drawable/tab_layout_back.xml" value="0.3828125" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/activity_holder.xml" value="0.3611111111111111" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/adib_list.xml" value="0.5" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/custom_layout.xml" value="0.26811594202898553" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_add.xml" value="0.33" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_adib.xml" value="0.3611111111111111" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_adib__child.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_saved.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_search.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_settings.xml" value="0.25" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/fragment_tab_holder.xml" value="0.33" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/item_tab.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/layout/item_tab_unselected.xml" value="0.25" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/menu/bottom_menu.xml" value="0.14814814814814814" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/menu/menu_child.xml" value="0.34629629629629627" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/menu/menu_item.xml" value="0.14537037037037037" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/menu/menu_search.xml" value="0.24259259259259258" />
+        <entry key="..\:/Users/Intel i3-9100F/AndroidStudioProjects/Adiblar_hayoti/app/src/main/res/xml/file_path.xml" value="0.1" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

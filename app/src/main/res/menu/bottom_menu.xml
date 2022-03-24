@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/adibFragment"
+        android:title="Adiblar"
+        android:icon="@drawable/adib"/>
+
+    <item
+        android:id="@+id/savedFragment"
+        android:title="Saqlangan"
+        android:icon="@drawable/save"/>
+
+    <item
+        android:id="@+id/settingsFragment"
+        android:title="Sozlamalar"
+        android:icon="@drawable/settings"/>
+
+
+</menu>

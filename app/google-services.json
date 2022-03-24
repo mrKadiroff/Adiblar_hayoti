@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "189510383734",
+    "firebase_url": "https://poets-20b12-default-rtdb.firebaseio.com",
+    "project_id": "poets-20b12",
+    "storage_bucket": "poets-20b12.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189510383734:android:3a994010b02e99c5808757",
+        "android_client_info": {
+          "package_name": "com.example.adiblar_hayoti"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "189510383734-hlp04b5pbf095dp6nt01lq5ptvferprn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQr2NDklTIV8_n2ZrLK8qkkK1fX67Ertg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "189510383734-hlp04b5pbf095dp6nt01lq5ptvferprn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

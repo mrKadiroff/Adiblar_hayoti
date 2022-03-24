@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.AddFragment">
+
+    <TextView
+        android:id="@+id/sarlavha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:text="Adib qo'shish"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/image_logo"
+        android:layout_width="160dp"
+        android:layout_height="120dp"
+        android:layout_gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/sarlavha"
+        app:layout_constraintVertical_bias="0.03">
+
+        <ImageView
+            android:id="@+id/profilePic"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="bottom|center_horizontal"
+            android:padding="10dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/gete" />
+
+
+    </FrameLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_image"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_bg"
+        android:text="Adib rasmi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/image_logo"
+         />
+
+
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintHeight_percent="0.07"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/edit_style"
+        android:elevation="1dp"
+        android:layout_marginTop="15dp"
+        android:textSize="14sp"
+        android:paddingStart="12sp"
+        android:hint="Adibning ismi, familiyasi va otasining ismi"
+        app:layout_constraintTop_toBottomOf="@id/add_image" />
+
+    <EditText
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintHeight_percent="0.07"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/edit_style"
+        android:elevation="1dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:paddingStart="12sp"
+        android:hint="Tug'ilgan yili"
+        app:layout_constraintTop_toBottomOf="@id/name" />
+
+
+    <EditText
+        android:id="@+id/death"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintHeight_percent="0.07"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/edit_style"
+        android:elevation="1dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:paddingStart="12sp"
+        android:hint="Vafot etgan yili"
+        app:layout_constraintTop_toBottomOf="@id/date" />
+
+
+    <Spinner
+        android:id="@+id/turi"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="30sp"
+        android:background="@drawable/edit_style"
+        android:elevation="1dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/death" />
+
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="123dp"
+        app:layout_constraintHeight_percent="0.07"
+        android:layout_marginHorizontal="30dp"
+        android:background="@drawable/edit_style"
+        android:elevation="1dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:gravity="start"
+        android:paddingTop="5dp"
+        android:paddingStart="12sp"
+        android:hint="Vafot etgan yili"
+        app:layout_constraintTop_toBottomOf="@id/turi" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/save"
+        android:layout_width="160dp"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:background="@drawable/btn_bg"
+        android:text="Saqlash"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/description"
+        app:layout_constraintEnd_toEndOf="@id/description"
+        android:layout_marginTop="12sp"
+         />
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
