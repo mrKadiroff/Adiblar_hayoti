@@ -50,4 +50,9 @@
         android:name="com.example.adiblar_hayoti.child.Adib_ChildFragment"
         android:label="fragment_adib__child"
         tools:layout="@layout/fragment_adib__child" />
+    <fragment
+        android:id="@+id/savedChildFragment"
+        android:name="com.example.adiblar_hayoti.child.SavedChildFragment"
+        android:label="fragment_saved_child"
+        tools:layout="@layout/fragment_saved_child" />
 </navigation>

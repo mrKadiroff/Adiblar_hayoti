@@ -72,7 +72,9 @@ class AdibFragment : Fragment() {
        binding.tooolbar.inflateMenu(R.menu.menu_item)
         binding.tooolbar.setOnMenuItemClickListener {
             if (it.itemId==R.id.search_action){
-                findNavController().navigate(R.id.searchFragment)
+                var bundle = Bundle()
+                bundle.putString("adib","adib")
+                findNavController().navigate(R.id.searchFragment,bundle)
             }
             true
         }
@@ -81,47 +83,47 @@ class AdibFragment : Fragment() {
 
         setViewPager()
 
-        setRv()
+//        setRv()
 
         return binding.root
     }
 
-    private fun setRv() {
-        reference.addValueEventListener(object: ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                list.clear()
-                val children = snapshot.children
-                for (child in children) {
-                    val value = child.getValue(Adib::class.java)
-                    if (value != null) {
-                        list.add(value)
-                    }
-
-                }
-
-                adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
-                    override fun onItemFavoriteClick(
-                        adibListBinding: AdibListBinding,
-                        adib: Adib,
-                        position: Int
-                    ) {
-
-                    }
-
-                    override fun onItemClick(adib: Adib, position: Int) {
-                        findNavController().navigate(R.id.adib_ChildFragment)
-                    }
-
-                })
-                binding.rv.adapter = adibAdapter
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-    }
+//    private fun setRv() {
+//        reference.addValueEventListener(object: ValueEventListener {
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                list.clear()
+//                val children = snapshot.children
+//                for (child in children) {
+//                    val value = child.getValue(Adib::class.java)
+//                    if (value != null) {
+//                        list.add(value)
+//                    }
+//
+//                }
+//
+//                adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
+//                    override fun onItemFavoriteClick(
+//                        adibListBinding: AdibListBinding,
+//                        adib: Adib,
+//                        position: Int
+//                    ) {
+//
+//                    }
+//
+//                    override fun onItemClick(adib: Adib, position: Int) {
+//                        findNavController().navigate(R.id.adib_ChildFragment)
+//                    }
+//
+//                })
+//                binding.rv.adapter = adibAdapter
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//
+//        })
+//    }
 
     private fun setViewPager() {
         val viewPager = binding.viewPager

@@ -1,34 +1,19 @@
 package com.example.adiblar_hayoti.child
 
-import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.AttributeSet
-
-
-import android.view.*
-import android.widget.LinearLayout
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.adiblar_hayoti.R
 import com.example.adiblar_hayoti.databinding.FragmentAdibChildBinding
-import com.example.adiblar_hayoti.databinding.FragmentSearchBinding
-import android.view.InflateException
-
-import android.view.LayoutInflater
-import com.bumptech.glide.Glide
-import com.example.adiblar_hayoti.HolderActivity
-import com.example.adiblar_hayoti.adapters.AdibAdapter
+import com.example.adiblar_hayoti.databinding.FragmentSavedChildBinding
 import com.example.adiblar_hayoti.models.Adib
 import com.example.adiblar_hayoti.room.Adib_Entity
 import com.example.adiblar_hayoti.room.AppDatabase
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
-
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -37,46 +22,38 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [Adib_ChildFragment.newInstance] factory method to
+ * Use the [SavedChildFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class Adib_ChildFragment : Fragment() {
+class SavedChildFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
-    lateinit var binding: FragmentAdibChildBinding
-    var list = ArrayList<Adib>()
-    private lateinit var adibAdapter: AdibAdapter
+    lateinit var binding: FragmentSavedChildBinding
     lateinit var appDatabase: AppDatabase
-    lateinit var favoritelist:ArrayList<Adib_Entity>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding =FragmentAdibChildBinding.inflate(layoutInflater,container,false)
+        binding =FragmentSavedChildBinding.inflate(layoutInflater,container,false)
         appDatabase = AppDatabase.getInstance(binding.root.context)
-        favoritelist = appDatabase.adibDao().getAllAdib() as ArrayList<Adib_Entity>
-        setUi()
-        setSave()
+        setUI()
         setSearch()
-
-
 
         return binding.root
     }
 
     private fun setSearch() {
-        binding.edittext.addTextChangedListener(object :TextWatcher{
+        binding.edittext.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -98,57 +75,39 @@ class Adib_ChildFragment : Fragment() {
         })
     }
 
-    private fun setSave() {
-        var a = 100
+    private fun setUI() {
+        val adib = arguments?.getSerializable("key") as Adib_Entity
+        val position = arguments?.getInt("int")
 
+        binding.liner.setBackgroundResource(R.drawable.circle_shape)
+            binding.collection.setImageResource(R.drawable.saved)
+
+        var a=100
         binding.liner.setOnClickListener {
-            val adibcha = arguments?.getSerializable("key") as Adib
-            val position = arguments?.getInt("int")
             if (a==position) {
                 binding.liner.setBackgroundResource(R.drawable.circle_shape)
                 binding.collection.setImageResource(R.drawable.saved)
                 val adibEntity = Adib_Entity()
-                adibEntity.photoUrl = adibcha.photoUrl
-                adibEntity.name = adibcha.name
-                adibEntity.birth_date = adibcha.birth_date
-                adibEntity.death_date = adibcha.death_date
-                adibEntity.type = adibcha.type
-                adibEntity.description = adibcha.description
+                adibEntity.photoUrl = adib.photoUrl
+                adibEntity.name = adib.name
+                adibEntity.birth_date = adib.birth_date
+                adibEntity.death_date = adib.death_date
+                adibEntity.type = adib.type
+                adibEntity.description = adib.description
                 appDatabase.adibDao().addKurs(adibEntity)
                 a++
             } else {
                 binding.liner.setBackgroundResource(R.color.white)
                 binding.collection.setImageResource(R.drawable.ribbon)
-                appDatabase.adibDao().deleteByName(adibcha.name!!)
+                appDatabase.adibDao().deleteByName(adib.name!!)
                 a=position!!
             }
         }
-    }
 
-    private fun setUi() {
-        val adibcha = arguments?.getSerializable("key") as Adib
-        val position = arguments?.getInt("int")
-
-        for (adibEntity in favoritelist) {
-            if (adibEntity.name == adibcha.name){
-                            binding.liner.setBackgroundResource(R.drawable.circle_shape)
-            binding.collection.setImageResource(R.drawable.saved)
-            }
-        }
-
-
-//        if (adibcha.selected == true){
-//            binding.liner.setBackgroundResource(R.drawable.circle_shape)
-//            binding.collection.setImageResource(R.drawable.saved)
-//        }else{
-//            binding.liner.setBackgroundResource(R.drawable.circle_white)
-//            binding.collection.setImageResource(R.drawable.ribbon)
-//        }
-
-        binding.name.text = adibcha.name
-        binding.years.text = "(${adibcha.birth_date}-${adibcha.death_date})"
-        binding.text.text = adibcha.description
-        Glide.with(binding.root.context).load(adibcha.photoUrl).into(binding.image)
+        binding.name.text = adib.name
+        binding.years.text = "(${adib.birth_date}-${adib.death_date})"
+        binding.text.text = adib.description
+        Glide.with(binding.root.context).load(adib.photoUrl).into(binding.image)
 
 
 
@@ -161,19 +120,8 @@ class Adib_ChildFragment : Fragment() {
             binding.gang.visibility = View.VISIBLE
             binding.gangster.visibility = View.INVISIBLE
         }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity as HolderActivity).hideBottomNavigation()
-    }
-
-    override fun onDetach() {
-        (activity as HolderActivity).showBottomNavigation()
-        super.onDetach()
 
     }
-
 
     companion object {
         /**
@@ -182,12 +130,12 @@ class Adib_ChildFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment Adib_ChildFragment.
+         * @return A new instance of fragment SavedChildFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            Adib_ChildFragment().apply {
+            SavedChildFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

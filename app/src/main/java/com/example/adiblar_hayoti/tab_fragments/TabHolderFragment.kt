@@ -13,6 +13,8 @@ import com.example.adiblar_hayoti.databinding.AdibListBinding
 import com.example.adiblar_hayoti.databinding.FragmentAdibBinding
 import com.example.adiblar_hayoti.databinding.FragmentTabHolderBinding
 import com.example.adiblar_hayoti.models.Adib
+import com.example.adiblar_hayoti.room.Adib_Entity
+import com.example.adiblar_hayoti.room.AppDatabase
 import com.google.firebase.database.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,15 +45,20 @@ class TabHolderFragment : Fragment() {
     var list = ArrayList<Adib>()
     private lateinit var adibAdapter: AdibAdapter
     private val TAG = "TabHolderFragment"
+    lateinit var appDatabase: AppDatabase
+
+    lateinit var favoritelist:ArrayList<Adib_Entity>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentTabHolderBinding.inflate(layoutInflater,container,false)
-
+        appDatabase = AppDatabase.getInstance(binding.root.context)
         firebaseDatabase = FirebaseDatabase.getInstance()
         reference = firebaseDatabase.getReference("poets")
+
+        favoritelist = appDatabase.adibDao().getAllAdib() as ArrayList<Adib_Entity>
 
         if (categoryID == 1){
             reference.addValueEventListener(object:ValueEventListener{
@@ -65,7 +72,7 @@ class TabHolderFragment : Fragment() {
                         }
                     }
                     Log.d(TAG, "onDataChange: ${list}")
-                    adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
+                    adibAdapter = AdibAdapter(list,favoritelist,object:AdibAdapter.OnItemClickListener{
                         var a = 100
                         override fun onItemFavoriteClick(
                             adibListBinding: AdibListBinding,
@@ -78,15 +85,21 @@ class TabHolderFragment : Fragment() {
 
 
                             if (a==position) {
-                                reference.child("${adib.name}/selected").setValue(true)
                                 adibListBinding.liner.setBackgroundResource(R.drawable.circle_shape)
                                 adibListBinding.collection.setImageResource(R.drawable.saved)
+                                val adibEntity = Adib_Entity()
+                                adibEntity.photoUrl = adib.photoUrl
+                                adibEntity.name = adib.name
+                                adibEntity.birth_date = adib.birth_date
+                                adibEntity.death_date = adib.death_date
+                                adibEntity.type = adib.type
+                                adibEntity.description = adib.description
+                                appDatabase.adibDao().addKurs(adibEntity)
                                 a++
                             } else {
-                                reference.child("${adib.name}/selected").setValue(false)
                                 adibListBinding.liner.setBackgroundResource(R.color.white)
                                 adibListBinding.collection.setImageResource(R.drawable.ribbon)
-
+                                appDatabase.adibDao().deleteByName(adib.name!!)
                                 a=position
                             }
 
@@ -96,7 +109,9 @@ class TabHolderFragment : Fragment() {
 
 
 
-                        }
+
+
+                    }
 
                         override fun onItemClick(adib: Adib, position: Int) {
                             var bundle = Bundle()
@@ -129,7 +144,7 @@ class TabHolderFragment : Fragment() {
                         }
                     }
                     Log.d(TAG, "onDataChange: ${list}")
-                    adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
+                    adibAdapter = AdibAdapter(list,favoritelist,object:AdibAdapter.OnItemClickListener{
                         var a = 100
                         override fun onItemFavoriteClick(
                             adibListBinding: AdibListBinding,
@@ -137,15 +152,21 @@ class TabHolderFragment : Fragment() {
                             position: Int
                         ) {
                             if (a==position) {
-                                reference.child("${adib.name}/selected").setValue(true)
                                 adibListBinding.liner.setBackgroundResource(R.drawable.circle_shape)
                                 adibListBinding.collection.setImageResource(R.drawable.saved)
+                                val adibEntity = Adib_Entity()
+                                adibEntity.photoUrl = adib.photoUrl
+                                adibEntity.name = adib.name
+                                adibEntity.birth_date = adib.birth_date
+                                adibEntity.death_date = adib.death_date
+                                adibEntity.type = adib.type
+                                adibEntity.description = adib.description
+                                appDatabase.adibDao().addKurs(adibEntity)
                                 a++
                             } else {
-                                reference.child("${adib.name}/selected").setValue(false)
                                 adibListBinding.liner.setBackgroundResource(R.color.white)
                                 adibListBinding.collection.setImageResource(R.drawable.ribbon)
-
+                                appDatabase.adibDao().deleteByName(adib.name!!)
                                 a=position
                             }
 
@@ -181,7 +202,7 @@ class TabHolderFragment : Fragment() {
                         }
                     }
                     Log.d(TAG, "onDataChange: ${list}")
-                    adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
+                    adibAdapter = AdibAdapter(list,favoritelist,object:AdibAdapter.OnItemClickListener{
                         var a = 100
                         override fun onItemFavoriteClick(
                             adibListBinding: AdibListBinding,
@@ -189,15 +210,21 @@ class TabHolderFragment : Fragment() {
                             position: Int
                         ) {
                             if (a==position) {
-                                reference.child("${adib.name}/selected").setValue(true)
                                 adibListBinding.liner.setBackgroundResource(R.drawable.circle_shape)
                                 adibListBinding.collection.setImageResource(R.drawable.saved)
+                                val adibEntity = Adib_Entity()
+                                adibEntity.photoUrl = adib.photoUrl
+                                adibEntity.name = adib.name
+                                adibEntity.birth_date = adib.birth_date
+                                adibEntity.death_date = adib.death_date
+                                adibEntity.type = adib.type
+                                adibEntity.description = adib.description
+                                appDatabase.adibDao().addKurs(adibEntity)
                                 a++
                             } else {
-                                reference.child("${adib.name}/selected").setValue(false)
                                 adibListBinding.liner.setBackgroundResource(R.color.white)
                                 adibListBinding.collection.setImageResource(R.drawable.ribbon)
-
+                                appDatabase.adibDao().deleteByName(adib.name!!)
                                 a=position
                             }
                         }

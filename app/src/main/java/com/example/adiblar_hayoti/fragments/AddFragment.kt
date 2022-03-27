@@ -17,12 +17,12 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.FileProvider
 import androidx.navigation.fragment.findNavController
-import com.example.adiblar_hayoti.BuildConfig
 import com.example.adiblar_hayoti.HolderActivity
 import com.example.adiblar_hayoti.R
 import com.example.adiblar_hayoti.databinding.FragmentAddBinding
 import com.example.adiblar_hayoti.databinding.FragmentTabHolderBinding
 import com.example.adiblar_hayoti.models.Adib
+import com.github.florent37.runtimepermission.kotlin.BuildConfig
 import com.github.florent37.runtimepermission.kotlin.askPermission
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -168,7 +168,7 @@ class AddFragment : Fragment() {
                             var deathh = binding.death.text.toString()
                             var type = binding.turi.selectedItem.toString()
                             var descriptiona = binding.description.text.toString()
-                            val adib = Adib(imgUrl,name,birth,deathh,type,descriptiona,false)
+                            val adib = Adib(imgUrl,name,birth,deathh,type,descriptiona)
                             if (name.isNotEmpty()&&birth.isNotEmpty()&&deathh.isNotEmpty()&&type.isNotEmpty()&&descriptiona.isNotEmpty()){
                                 referenceRealtime.child(name).setValue(adib)
 
@@ -249,7 +249,7 @@ class AddFragment : Fragment() {
                                 var deathh = binding.death.text.toString()
                                 var type = binding.turi.selectedItem.toString()
                                 var descriptiona = binding.description.text.toString()
-                                val adib = Adib(imgUrlcha,name,birth,deathh,type,descriptiona,false)
+                                val adib = Adib(imgUrlcha,name,birth,deathh,type,descriptiona)
                                 if (name.isNotEmpty()&&birth.isNotEmpty()&&deathh.isNotEmpty()&&type.isNotEmpty()&&descriptiona.isNotEmpty()){
                                     referenceRealtime.child(name).setValue(adib)
 

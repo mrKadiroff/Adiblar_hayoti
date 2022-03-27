@@ -9,7 +9,7 @@ class Adib: Serializable {
     var death_date: String? = null
     var type: String? = null
     var description: String? = null
-    var selected: Boolean? = null
+
 
 
 
@@ -20,8 +20,7 @@ class Adib: Serializable {
         birth_date: String?,
         death_date: String?,
         type: String?,
-        description: String?,
-        selected: Boolean?
+        description: String?
     ) {
         this.photoUrl = photoUrl
         this.name = name
@@ -29,7 +28,6 @@ class Adib: Serializable {
         this.death_date = death_date
         this.type = type
         this.description = description
-        this.selected = selected
     }
 
 

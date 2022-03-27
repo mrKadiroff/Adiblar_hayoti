@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F4F4F4"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".child.SavedChildFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gangster"
+        android:layout_width="match_parent"
+        android:visibility="invisible"
+        android:layout_height="45dp"
+        android:background="@drawable/search_text_style"
+        android:layout_margin="19sp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/edittext"
+            android:layout_width="0dp"
+            app:layout_constraintEnd_toStartOf="@id/clear"
+            android:gravity="start|center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:hint="search..."
+
+            android:backgroundTint="@color/white"
+            android:textSize="14sp"
+            android:paddingStart="19dp"
+            android:layout_height="match_parent">
+
+
+        </EditText>
+
+
+        <ImageView
+            android:id="@+id/clear"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:src="@drawable/ic_baseline_clear_24"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16sp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:id="@+id/gang"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="22dp"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:id="@+id/liner_search"
+            android:layout_width="44sp"
+            android:layout_height="34dp"
+            android:background="@drawable/circle_white"
+            android:layout_marginEnd="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:gravity="center"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/liner_nazad"
+            app:layout_constraintVertical_bias="0.029">
+
+
+            <ImageView
+                android:id="@+id/search"
+                android:layout_width="20dp"
+                android:background="@color/white"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_baseline_search_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/search"-->
+        <!--            android:layout_width="23dp"-->
+        <!--            android:background="@color/white"-->
+        <!--            android:layout_height="23dp"-->
+        <!--            app:layout_constraintTop_toTopOf="parent"-->
+        <!--            android:src="@drawable/ic_baseline_search_24"-->
+        <!--            android:layout_marginTop="12sp"-->
+        <!--            app:layout_constraintEnd_toEndOf="parent"-->
+        <!--            android:layout_marginEnd="26sp"-->
+        <!--            android:layout_gravity="end"-->
+        <!--            />-->
+
+        <LinearLayout
+            android:id="@+id/liner"
+            android:layout_width="34sp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="3dp"
+            android:gravity="center"
+            android:layout_marginTop="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/liner_search"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/liner_nazad"
+            app:layout_constraintVertical_bias="0.029">
+
+
+            <ImageView
+                android:id="@+id/collection"
+                android:layout_width="19dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ribbon"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/liner_nazad"
+            android:layout_width="34sp"
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:layout_marginStart="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="11sp"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.029">
+
+
+            <ImageView
+                android:id="@+id/nazad"
+                android:layout_width="17dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="3dp"
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="@id/search"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/ic_baseline_arrow_back_ios_new_24"/>
+
+        </LinearLayout>
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintTop_toBottomOf="@id/gangster">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:text=""
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/years"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:text=""
+                android:textSize="16sp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/name" />
+
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="5dp"
+                android:background="@android:color/white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:layout_constraintTop_toBottomOf="@id/years">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/elon"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.athkalia.emphasis.EmphasisTextView
+                        android:id="@+id/text"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text=""
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/image" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="75dp"
+                app:layout_constraintTop_toBottomOf="@id/layout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

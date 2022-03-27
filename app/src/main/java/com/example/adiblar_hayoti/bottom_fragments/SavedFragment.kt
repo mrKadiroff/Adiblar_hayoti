@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.adiblar_hayoti.R
 import com.example.adiblar_hayoti.adapters.AdibAdapter
+import com.example.adiblar_hayoti.adapters.FavoriteAdapter
 import com.example.adiblar_hayoti.databinding.AdibListBinding
 import com.example.adiblar_hayoti.databinding.FragmentAdibBinding
 import com.example.adiblar_hayoti.databinding.FragmentSavedBinding
 import com.example.adiblar_hayoti.models.Adib
+import com.example.adiblar_hayoti.room.Adib_Entity
+import com.example.adiblar_hayoti.room.AppDatabase
 import com.google.firebase.database.*
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,69 +40,110 @@ class SavedFragment : Fragment() {
         }
     }
     lateinit var binding: FragmentSavedBinding
-    lateinit var firebaseDatabase: FirebaseDatabase
-    lateinit var reference: DatabaseReference
-    var list = ArrayList<Adib>()
-    private lateinit var adibAdapter: AdibAdapter
+    var list = ArrayList<Adib_Entity>()
+    lateinit var favoriteAdapter: FavoriteAdapter
+    lateinit var appDatabase: AppDatabase
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentSavedBinding.inflate(layoutInflater,container,false)
-        firebaseDatabase = FirebaseDatabase.getInstance()
-        reference = firebaseDatabase.getReference("poets")
+        appDatabase = AppDatabase.getInstance(binding.root.context)
 
-        reference.addValueEventListener(object:ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                list.clear()
-                val children = snapshot.children
-                for (child in children) {
-                    val value = child.getValue(Adib::class.java)
-                    if (value!!.selected == true){
-                        list.add(value)
-                    }
-                }
+        setToolbar()
+        setRv()
 
-                adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
-                    var a = 100
-                    override fun onItemFavoriteClick(
-                        adibListBinding: AdibListBinding,
-                        adib: Adib,
-                        position: Int
-                    ) {
-                        if (a==position) {
-                            reference.child("${adib.name}/selected").setValue(true)
-                            adibListBinding.liner.setBackgroundResource(R.drawable.circle_shape)
-                            adibListBinding.collection.setImageResource(R.drawable.saved)
-                            a++
-                        } else {
-                            reference.child("${adib.name}/selected").setValue(false)
-                            adibListBinding.liner.setBackgroundResource(R.color.white)
-                            adibListBinding.collection.setImageResource(R.drawable.ribbon)
+//        reference.addValueEventListener(object:ValueEventListener{
+//            override fun onDataChange(snapshot: DataSnapshot) {
+//                list.clear()
+//                val children = snapshot.children
+////                for (child in children) {
+////                    val value = child.getValue(Adib::class.java)
+////                    if (value!!.selected == true){
+////                        list.add(value)
+////                    }
+////                }
+//
+//                adibAdapter = AdibAdapter(list,object:AdibAdapter.OnItemClickListener{
+//                    var a = 100
+//                    override fun onItemFavoriteClick(
+//                        adibListBinding: AdibListBinding,
+//                        adib: Adib,
+//                        position: Int
+//                    ) {
+//                        if (a==position) {
+//                            reference.child("${adib.name}/selected").setValue(true)
+//                            adibListBinding.liner.setBackgroundResource(R.drawable.circle_shape)
+//                            adibListBinding.collection.setImageResource(R.drawable.saved)
+//                            a++
+//                        } else {
+//                            reference.child("${adib.name}/selected").setValue(false)
+//                            adibListBinding.liner.setBackgroundResource(R.color.white)
+//                            adibListBinding.collection.setImageResource(R.drawable.ribbon)
+//
+//                            a=position
+//                        }
+//                    }
+//
+//                    override fun onItemClick(adib: Adib, position: Int) {
+//                        var bundle = Bundle()
+//                        bundle.putSerializable("key",adib)
+//                        bundle.putInt("int",position)
+//                        findNavController().navigate(R.id.adib_ChildFragment,bundle)
+//                    }
+//
+//                })
+//                binding.rv.adapter = adibAdapter
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//
+//        })
 
-                            a=position
-                        }
-                    }
+        return binding.root
+    }
 
-                    override fun onItemClick(adib: Adib, position: Int) {
-                        var bundle = Bundle()
-                        bundle.putSerializable("key",adib)
-                        bundle.putInt("int",position)
-                        findNavController().navigate(R.id.adib_ChildFragment,bundle)
-                    }
+    private fun setToolbar() {
+        binding.tooolbar.inflateMenu(R.menu.menu_item)
+        binding.tooolbar.setOnMenuItemClickListener {
+            if (it.itemId==R.id.search_action){
+                var bundle = Bundle()
+                bundle.putString("saved","saved")
+                findNavController().navigate(R.id.searchFragment,bundle)
+            }
+            true
+        }
+    }
 
-                })
-                binding.rv.adapter = adibAdapter
+    private fun setRv() {
+        list = appDatabase.adibDao().getAllAdib() as ArrayList<Adib_Entity>
+        favoriteAdapter = FavoriteAdapter(list,object :FavoriteAdapter.OnItemClickListener{
+            override fun onItemFavoriteClick(
+                adibListBinding: AdibListBinding,
+                adibEntity: Adib_Entity,
+                position: Int
+            ) {
+                adibListBinding.liner.setBackgroundResource(R.color.white)
+                adibListBinding.collection.setImageResource(R.drawable.ribbon)
+                appDatabase.adibDao().deleteByName(adibEntity.name!!)
+                list.remove(adibEntity)
+                favoriteAdapter.notifyItemRemoved(position)
+                favoriteAdapter.notifyItemRangeChanged(position,list.size - position)
             }
 
-            override fun onCancelled(error: DatabaseError) {
-
+            override fun onItemClick(adibEntity: Adib_Entity, position: Int) {
+                var bundle = Bundle()
+                bundle.putSerializable("key",adibEntity)
+                bundle.putInt("int",position)
+                findNavController().navigate(R.id.savedChildFragment,bundle)
             }
 
         })
-
-        return binding.root
+        binding.rv.adapter = favoriteAdapter
+        favoriteAdapter.notifyDataSetChanged()
     }
 
     companion object {
