@@ -1,27 +1,23 @@
 package com.example.adiblar_hayoti.fragments
 
-import android.content.Context
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.*
-import android.widget.SearchView
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
-
-import com.example.adiblar_hayoti.HolderActivity
 import com.example.adiblar_hayoti.R
 import com.example.adiblar_hayoti.adapters.AdibAdapter
 import com.example.adiblar_hayoti.adapters.FavoriteAdapter
 import com.example.adiblar_hayoti.databinding.AdibListBinding
-import com.example.adiblar_hayoti.databinding.FragmentAddBinding
-import com.example.adiblar_hayoti.databinding.FragmentSearchBinding
+import com.example.adiblar_hayoti.databinding.FragmentAdibBinding
+import com.example.adiblar_hayoti.databinding.FragmentProbaSearchBinding
 import com.example.adiblar_hayoti.models.Adib
 import com.example.adiblar_hayoti.room.Adib_Entity
 import com.example.adiblar_hayoti.room.AppDatabase
 import com.google.firebase.database.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,166 +26,96 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [SearchFragment.newInstance] factory method to
+ * Use the [ProbaSearchFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SearchFragment : Fragment() {
+class ProbaSearchFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        setHasOptionsMenu(true)
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
-    lateinit var binding: FragmentSearchBinding
+    lateinit var binding: FragmentProbaSearchBinding
     lateinit var firebaseDatabase: FirebaseDatabase
     lateinit var reference: DatabaseReference
     var list = ArrayList<Adib>()
+    lateinit var tepmArraylist:ArrayList<Adib>
     private lateinit var adibAdapter: AdibAdapter
 
     lateinit var appDatabase: AppDatabase
-    lateinit var favoriteAdapter: FavoriteAdapter
     lateinit var favoritelist:ArrayList<Adib_Entity>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentSearchBinding.inflate(layoutInflater,container,false)
+        binding = FragmentProbaSearchBinding.inflate(layoutInflater,container,false)
         appDatabase = AppDatabase.getInstance(binding.root.context)
         firebaseDatabase = FirebaseDatabase.getInstance()
         reference = firebaseDatabase.getReference("poets")
-
-
-        favoritelist = appDatabase.adibDao().getAllAdib() as ArrayList<Adib_Entity>
-
-
-        val adib = arguments?.getString("adib")
-        val saved = arguments?.getString("saved")
-
-        if (saved!=null){
-            setSaveRv()
-
-
-
-               binding.edittext.addTextChangedListener(object :TextWatcher{
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    filterrSave(s.toString())
-                }
-
-            })
-
-
-
-        }
-
-
-        if (adib!=null){
-            setRv()
-
-            binding.edittext.addTextChangedListener(object :TextWatcher{
-                override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-                }
-
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-
-                }
-
-                override fun afterTextChanged(s: Editable?) {
-                    filterr(s.toString())
-                }
-
-            })
-        }
-
-
-
-//        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.tooolbar)
+//        (requireActivity() as AppCompatActivity).setSupportActionBar(binding.)
 //        (requireActivity() as AppCompatActivity).supportActionBar!!.setDisplayShowTitleEnabled(false)
 
 
 
+        favoritelist = appDatabase.adibDao().getAllAdib() as ArrayList<Adib_Entity>
 
+        binding.searchAdib.setQuery("",true);
+        binding.searchAdib.setFocusable(true);
+        binding.searchAdib.setIconified(false);
+        binding.searchAdib.requestFocusFromTouch();
+        setRv()
 
-        return binding.root
-    }
-
-    private fun filterrSave(toString: String) {
-        val filteredList: ArrayList<Adib_Entity> = ArrayList()
-        for (item in favoritelist) {
-            if (item.name!!.toLowerCase().contains(toString.toLowerCase())) {
-                filteredList.add(item)
-            }
-        }
-        binding.clear.setOnClickListener {
-            binding.edittext.setText("")
-        }
-
-        if (toString.isEmpty()){
-            binding.clear.visibility = View.GONE
-        }else{
-            binding.clear.visibility = View.VISIBLE
-        }
-
-        favoriteAdapter.filterList(filteredList)
-    }
-
-    private fun setSaveRv() {
-        favoriteAdapter = FavoriteAdapter(favoritelist,object : FavoriteAdapter.OnItemClickListener{
-            override fun onItemFavoriteClick(
-                adibListBinding: AdibListBinding,
-                adibEntity: Adib_Entity,
-                position: Int
-            ) {
-                adibListBinding.liner.setBackgroundResource(R.color.white)
-                adibListBinding.collection.setImageResource(R.drawable.ribbon)
-                appDatabase.adibDao().deleteByName(adibEntity.name!!)
-                favoritelist.remove(adibEntity)
-                favoriteAdapter.notifyItemRemoved(position)
-                favoriteAdapter.notifyItemRangeChanged(position,list.size - position)
+        binding.searchAdib.setOnQueryTextListener(object :SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
             }
 
-            override fun onItemClick(adibEntity: Adib_Entity, position: Int) {
+            override fun onQueryTextChange(newText: String?): Boolean {
+                var list2 = ArrayList<Adib>()
+                for (adib in list) {
+                    for (i in 0 until adib.name?.length!!){
+                        if (adib.name?.subSequence(0,i).toString()
+                                .lowercase(Locale.getDefault()) == newText?.lowercase()){
+                            list2.add(adib)
+                        }
+                    }
+                }
+                adibAdapter = AdibAdapter(list2,favoritelist,object : AdibAdapter.OnItemClickListener{
+                    var a = 100
+                    override fun onItemFavoriteClick(
+                        adibListBinding: AdibListBinding,
+                        adib: Adib,
+                        position: Int
+                    ) {
+                
+                    }
 
+                    override fun onItemClick(adib: Adib, position: Int) {
+                        var bundle = Bundle()
+                        bundle.putSerializable("key",adib)
+                        bundle.putInt("int",position)
+                        findNavController().navigate(R.id.adib_ChildFragment,bundle)
+                    }
+
+                })
+
+
+                binding.rvSearch.adapter = adibAdapter
+                return true
             }
 
         })
-        binding.rv.adapter = favoriteAdapter
-        favoriteAdapter.notifyDataSetChanged()
-    }
 
-    private fun filterr(toString: String) {
-        val filteredList: ArrayList<Adib> = ArrayList()
-        for (item in list) {
-            if (item.name!!.toLowerCase().contains(toString.toLowerCase())) {
-                filteredList.add(item)
-            }
-        }
-        binding.clear.setOnClickListener {
-            binding.edittext.setText("")
-        }
 
-       if (toString.isEmpty()){
-           binding.clear.visibility = View.GONE
-       }else{
-           binding.clear.visibility = View.VISIBLE
-       }
-
-        adibAdapter.filterList(filteredList)
+        return binding.root
     }
 
     private fun setRv() {
@@ -204,6 +130,8 @@ class SearchFragment : Fragment() {
                     }
 
                 }
+
+
 
                 adibAdapter = AdibAdapter(list,favoritelist,object:AdibAdapter.OnItemClickListener{
                     var a = 100
@@ -240,7 +168,7 @@ class SearchFragment : Fragment() {
                     }
 
                 })
-                binding.rv.adapter = adibAdapter
+                binding.rvSearch.adapter = adibAdapter
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -250,22 +178,38 @@ class SearchFragment : Fragment() {
         })
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.menu_search,menu)
-        super.onCreateOptionsMenu(menu, inflater)
-    }
-
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (activity as HolderActivity).hideBottomNavigation()
-    }
-
-    override fun onDetach() {
-        (activity as HolderActivity).showBottomNavigation()
-        super.onDetach()
-
-    }
+//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+//        super.onCreateOptionsMenu(menu, inflater)
+//        inflater.inflate(R.menu.menu_search,menu)
+//        val item = menu?.findItem(R.id.search_action_best)
+//        val searchView = item?.actionView as SearchView
+//        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+//            override fun onQueryTextSubmit(query: String?): Boolean {
+//                TODO("Not yet implemented")
+//            }
+//
+//            override fun onQueryTextChange(newText: String?): Boolean {
+//
+//
+//                tepmArraylist.clear()
+//                val searchText = newText!!.toLowerCase(Locale.getDefault())
+//                if (searchText.isNotEmpty()){
+//                    list.forEach{
+//                        if ("${it.name}"?.toLowerCase(Locale.getDefault())!!.contains(searchText)){
+//                            tepmArraylist.add(it)
+//                        }
+//                    }
+//                    binding.pasportRv.adapter!!.notifyDataSetChanged()
+//                }else{
+//                    tepmArraylist.clear()
+//                    tepmArraylist.addAll(list)
+//                    binding.pasportRv.adapter!!.notifyDataSetChanged()
+//                }
+//                return false
+//            }
+//
+//        })
+//    }
 
     companion object {
         /**
@@ -274,12 +218,12 @@ class SearchFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SearchFragment.
+         * @return A new instance of fragment ProbaSearchFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SearchFragment().apply {
+            ProbaSearchFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -55,4 +55,9 @@
         android:name="com.example.adiblar_hayoti.child.SavedChildFragment"
         android:label="fragment_saved_child"
         tools:layout="@layout/fragment_saved_child" />
+    <fragment
+        android:id="@+id/probaSearchFragment"
+        android:name="com.example.adiblar_hayoti.fragments.ProbaSearchFragment"
+        android:label="fragment_proba_search"
+        tools:layout="@layout/fragment_proba_search" />
 </navigation>

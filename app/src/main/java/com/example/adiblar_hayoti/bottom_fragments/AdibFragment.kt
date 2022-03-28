@@ -74,7 +74,7 @@ class AdibFragment : Fragment() {
             if (it.itemId==R.id.search_action){
                 var bundle = Bundle()
                 bundle.putString("adib","adib")
-                findNavController().navigate(R.id.searchFragment,bundle)
+                findNavController().navigate(R.id.probaSearchFragment,bundle)
             }
             true
         }
